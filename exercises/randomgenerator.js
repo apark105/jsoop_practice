@@ -29,7 +29,6 @@ class RandomGenerator{
 	}
 }
 
-debugger;
 var number = new RandomGenerator('moo')
 
 
