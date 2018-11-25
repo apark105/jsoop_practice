@@ -32,3 +32,4 @@ class RandomGenerator{
 var number = new RandomGenerator('moo')
 
 
+
