@@ -1,10 +1,18 @@
 
 class Calculator{
 	constructor(){
+		// this.add = '+',
+		// this.subtract = '-',
+		// this.multiply = '*',
+		// this.divide = '/',
+		this.operator = null;
+		this.number = null;
 		//takes in nothing
 		//make storage for the operator and the numbers
 	}
-	loadOperator(  ){
+	loadOperator( operator ){
+		var operatorCheck = ['+', '-', '*', '/'];
+		this.operator = operatorCheck.indexOf(operator) !== -1 ? operator : false
 		//adds the operator to the next calculation
 		//takes in the operator
 		//checks if it is a valid operation (+-*/)
@@ -12,7 +20,10 @@ class Calculator{
 			//return true
 		//or return false if not the right operator
 	}
-	loadNumber(  ){
+	loadNumber(num1, num2){
+		if (!isNaN(num1)) {
+			
+		}
 		//takes in a number and stores it as one of the numbers to perform math on
 		//takes in 1 number
 		//checks if it is actually a number and if we have fewer than 2 numbers
