@@ -11,7 +11,8 @@ class Bank{
 			return false; 
 		}
 		else {
-			this.accountInfo[accountNumber] = 0
+			var newAccount = new Account();
+			this.accountInfo[accountNumber] = newAccount
 			return this.accountInfo.accountNumber
 		}
 		//makes an account
@@ -34,11 +35,10 @@ class Bank{
 		//returns true if the account does exist
 	}
 	removeAccount( accountNumber ){
-
 		if (typeof(this.accountInfo[accountNumber]) == 'undefined') {
 			return `account ${accountNumber} does not exist`
 		}
-		else if (!!this.accountInfo[accountNumber]) {
+		else if (!!this.accountInfo[accountNumber]['money']) {
 			return `account is not empty`
 		}
 		else {
@@ -62,7 +62,8 @@ class Bank{
 			return `account does not exist`
 		}
 		else {
-			this.accountInfo[accountNumber] = this.accountInfo[accountNumber] + amount
+			this.accountInfo[accountNumber].add(amount)
+			// this.accountInfo[accountNumber] = this.accountInfo[accountNumber] + amount
 			return `account ${accountNumber} now has ${amount}`
 		}
 		//deposits money into an account
@@ -78,14 +79,15 @@ class Bank{
 			return `account does not exist`
 		}
 		else {
-			if ( this.accountInfo[accountNumber] < amount ) {
-				var remainingAmt = this.accountInfo[accountNumber]
-				this.accountInfo[accountNumber] = 0
+			if ( this.accountInfo[accountNumber]['money'] < amount ) {
+				var remainingAmt = this.accountInfo[accountNumber]['money']
+				this.accountInfo[accountNumber]['money'] = 0
 				return `removed ${remainingAmt} from account ${accountNumber}. It now has 0`
 			}
 			else {
-				this.accountInfo[accountNumber] = this.accountInfo[accountNumber] - amount
-				return `removed ${amount} from account ${accountNumber}. It now has ${this.accountInfo[accountNumber]}`
+				this.accountInfo[accountNumber].remove(amount)
+				// this.accountInfo[accountNumber] = this.accountInfo[accountNumber] - amount
+				return `removed ${amount} from account ${accountNumber}. It now has ${this.accountInfo[accountNumber]['money']}`
 			}
 		}
 		//removes money from an account
@@ -96,10 +98,3 @@ class Bank{
 		//returns "removed <amount withdrawn> from account <account number>. It now has <remaining amount in account>"
 	}
 }
-
-var newAccount = new Bank();
-debugger;
-newAccount.makeAccount('1349823399')
-newAccount.deposit('1349823399', 10)
-newAccount.withdraw('1349823399', 20)
-newAccount.removeAccount('1349823399')
