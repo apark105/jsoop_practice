@@ -1,11 +1,20 @@
 
 
 class Bank{
-	constructor(){
+	constructor(name){
+		this.accountInfo = {}; 
 		//takes in the name of the bank.
 		//makes an object to store all accounts into
 	}
-	makeAccount( ){
+	makeAccount( accountNumber ){
+		if (accountNumber in this.accountInfo) {
+			return false; 
+		}
+		else {
+			var newAccount = new Account();
+			this.accountInfo[accountNumber] = newAccount
+			return this.accountInfo.accountNumber
+		}
 		//makes an account
 		//takes in the account number of an account
 		//checks if the account number already exists in the account storage object in the constructor
@@ -13,13 +22,29 @@ class Bank{
 		//otherwise makes an new Account object, storing it into the storage object in the constructor
 		//returns the Account object that was constructed
 	}
-	checkForAccount(  ){
+	checkForAccount( accountNumber ){
+		if (accountNumber in this.accountInfo) {
+			return true; 
+		}
+		else {
+			return false;
+		}
 		//checks if an account exists or not
 		//takes in the account number of an account
 		//returns false if the account does not exist in the accounts object from the constructor
 		//returns true if the account does exist
 	}
-	removeAccount(  ){
+	removeAccount( accountNumber ){
+		if (typeof(this.accountInfo[accountNumber]) == 'undefined') {
+			return `account ${accountNumber} does not exist`
+		}
+		else if (!!this.accountInfo[accountNumber]['money']) {
+			return `account is not empty`
+		}
+		else {
+			delete this.accountInfo[accountNumber]
+			return `account ${accountNumber} deleted`
+		}
 		//removes an account
 		//takes in an account number
 		//if the account doesn't exist, returns
@@ -28,10 +53,19 @@ class Bank{
 			//'account is not empty'
 		//otherwise deletes the account from the constructor storage
 		//returns 
-			'account <accountNumber> deleted'
+			//'account <accountNumber> deleted'
 
 	}
-	deposit( ){
+	deposit(accountNumber, amount ){
+
+		if (typeof(this.accountInfo[accountNumber]) == 'undefined') {
+			return `account does not exist`
+		}
+		else {
+			this.accountInfo[accountNumber].add(amount)
+			// this.accountInfo[accountNumber] = this.accountInfo[accountNumber] + amount
+			return `account ${accountNumber} now has ${amount}`
+		}
 		//deposits money into an account
 		//takes in an account number and a numeric amount
 		//if the account doesn't exist, returns
@@ -41,6 +75,21 @@ class Bank{
 			//"account <accountNumber> now has <new account amount>
 	}
 	withdraw( accountNumber, amount ){
+		if (typeof(this.accountInfo[accountNumber]) == 'undefined') {
+			return `account does not exist`
+		}
+		else {
+			if ( this.accountInfo[accountNumber]['money'] < amount ) {
+				var remainingAmt = this.accountInfo[accountNumber]['money']
+				this.accountInfo[accountNumber]['money'] = 0
+				return `removed ${remainingAmt} from account ${accountNumber}. It now has 0`
+			}
+			else {
+				this.accountInfo[accountNumber].remove(amount)
+				// this.accountInfo[accountNumber] = this.accountInfo[accountNumber] - amount
+				return `removed ${amount} from account ${accountNumber}. It now has ${this.accountInfo[accountNumber]['money']}`
+			}
+		}
 		//removes money from an account
 		//takes in an account number and an amount
 		//checks if the account exists, if not
