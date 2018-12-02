@@ -19,17 +19,9 @@ class Deck{
 		this.cardObj = [];
 	}
 	addCard( suit, faceValue ){
-		// var newCardArray =[];
 		debugger;
-		var newCard = new Card(suit, faceValue);
-		// newCardArray.push(newCard)
-		// newCardArray.push(newCard.getFaceValue(faceValue))
+		var newCard = new Card(suit, faceValue)
 		this.cardObj.unshift(newCard)
-		// this.cardObj.push({
-		// 	'Suit':newCard.getsuit(suit), 
-		// 	'Face Value': newCard.getFaceValue(faceValue)
-		
-		// })
 		return this.cardObj.length
 		//adds a card to the deck
 		//takes in a string suit and faceValue
